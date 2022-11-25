@@ -44,7 +44,17 @@ namespace pedidos.Controllers
 
         [HttpPut("{id:int}")]
 
-        public async 
+        public async Task<ActionResult> Put(Pedido pedido, int id)
+        {
+            if(pedido.Id != id)
+            {
+                return BadRequest("El id del alumno no coincide con el establecido en la url");
+            }
+
+            dbContext.Update(pedido);
+            await dbContext.SaveChangesAsync();
+            return Ok();
+        }
         
 
 
